@@ -80,6 +80,7 @@
               # Core tools
               git
               mask
+              nushell
 
               # Language support
               uv # Python
