@@ -30,6 +30,7 @@
           treefmtEval = inputs.treefmt-nix.lib.evalModule pkgs ./treefmt.nix;
           hello-py = pkgs.callPackage ./hello/python/hello/default.nix { };
           hello-c = pkgs.callPackage ./hello/c/hello/default.nix { };
+          hello-cpp = pkgs.callPackage ./hello/cpp/hello/default.nix { };
           hello-zig = pkgs.callPackage ./hello/zig/hello/default.nix { };
           hello-rust = pkgs.callPackage ./hello/rust/hello/default.nix { };
           hello-go = pkgs.callPackage ./hello/go/hello/default.nix { };
@@ -39,6 +40,7 @@
           packages = {
             hello-py = hello-py;
             hello-c = hello-c;
+            hello-cpp = hello-cpp;
             hello-zig = hello-zig;
             hello-rust = hello-rust;
             hello-go = hello-go;
@@ -53,6 +55,10 @@
             hello-c = {
               type = "app";
               program = "${hello-c}/bin/hello";
+            };
+            hello-cpp = {
+              type = "app";
+              program = "${hello-cpp}/bin/hello";
             };
             hello-zig = {
               type = "app";
@@ -76,10 +82,10 @@
               mask
 
               # Language support
-              uv      # Python
-              clang   # C
-              zig     # Zig
-              go      # Go
+              uv # Python
+              clang # C
+              zig # Zig
+              go # Go
 
               # Rust
               rustc
