@@ -6,6 +6,7 @@
     keep-sorted.enable = true;
     nixfmt.enable = true;
     ruff.enable = true;
+    clang-format.enable = true;
     # keep-sorted end
 
     mdformat = {

@@ -29,11 +29,13 @@
         let
           treefmtEval = inputs.treefmt-nix.lib.evalModule pkgs ./treefmt.nix;
           hello-py = pkgs.callPackage ./hello/python/hello/default.nix { };
+          hello-c = pkgs.callPackage ./hello/c/hello/default.nix { };
         in
         {
           # Packages
           packages = {
             hello-py = hello-py;
+            hello-c = hello-c;
           };
 
           # Apps (for nix run)
@@ -41,6 +43,10 @@
             hello-py = {
               type = "app";
               program = "${hello-py}/bin/hello";
+            };
+            hello-c = {
+              type = "app";
+              program = "${hello-c}/bin/hello";
             };
           };
 
