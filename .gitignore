@@ -4,3 +4,5 @@ scratchpad.md
 *.venv
 __pycache__
 *.pyc
+.zig-cache*
+zig-out*

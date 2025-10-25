@@ -30,12 +30,14 @@
           treefmtEval = inputs.treefmt-nix.lib.evalModule pkgs ./treefmt.nix;
           hello-py = pkgs.callPackage ./hello/python/hello/default.nix { };
           hello-c = pkgs.callPackage ./hello/c/hello/default.nix { };
+          hello-zig = pkgs.callPackage ./hello/zig/hello/default.nix { };
         in
         {
           # Packages
           packages = {
             hello-py = hello-py;
             hello-c = hello-c;
+            hello-zig = hello-zig;
           };
 
           # Apps (for nix run)
@@ -48,6 +50,10 @@
               type = "app";
               program = "${hello-c}/bin/hello";
             };
+            hello-zig = {
+              type = "app";
+              program = "${hello-zig}/bin/hello";
+            };
           };
 
           # Development shell with nickel and mask
@@ -57,8 +63,10 @@
               git
               mask
 
-              # Python support
-              uv
+              # Language support
+              uv      # Python
+              clang   # C
+              zig     # Zig
             ];
 
             shellHook = ''
