@@ -34,6 +34,7 @@
           hello-zig = pkgs.callPackage ./hello/zig/hello/default.nix { };
           hello-rust = pkgs.callPackage ./hello/rust/hello/default.nix { };
           hello-go = pkgs.callPackage ./hello/go/hello/default.nix { };
+          hello-ts = pkgs.callPackage ./hello/typescript/hello/default.nix { };
         in
         {
           # Packages
@@ -44,6 +45,7 @@
             hello-zig = hello-zig;
             hello-rust = hello-rust;
             hello-go = hello-go;
+            hello-ts = hello-ts;
           };
 
           # Apps (for nix run)
@@ -72,6 +74,10 @@
               type = "app";
               program = "${hello-go}/bin/hello";
             };
+            hello-ts = {
+              type = "app";
+              program = "${hello-ts}/bin/hello";
+            };
           };
 
           # Development shell with nickel and mask
@@ -87,6 +93,7 @@
               clang # C
               zig # Zig
               go # Go
+              nodejs # TypeScript/JavaScript
 
               # Rust
               rustc

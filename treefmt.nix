@@ -3,6 +3,7 @@
   projectRootFile = "flake.nix";
   programs = {
     # keep-sorted start
+    biome.enable = true;
     clang-format.enable = true;
     cmake-format.enable = true;
     gofumpt.enable = true;

@@ -14,4 +14,5 @@ nix run .#hello-rust
 nix run .#hello-zig
 nix run .#hello-go
 nix run .#hello-py
+nix run .#hello-ts
 ```
