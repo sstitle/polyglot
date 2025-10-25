@@ -1,4 +1,6 @@
-{ pkgs ? import <nixpkgs> { } }:
+{
+  pkgs ? import <nixpkgs> { },
+}:
 
 pkgs.stdenv.mkDerivation {
   pname = "hello";
@@ -17,24 +19,24 @@ pkgs.stdenv.mkDerivation {
   '';
 
   installPhase = ''
-    mkdir -p $out/share/hello
+        mkdir -p $out/share/hello
 
-    # Copy source files
-    cp main.py $out/share/hello/
-    cp pyproject.toml $out/share/hello/
-    cp uv.lock $out/share/hello/
+        # Copy source files
+        cp main.py $out/share/hello/
+        cp pyproject.toml $out/share/hello/
+        cp uv.lock $out/share/hello/
 
-    # Copy the virtual environment
-    cp -r .venv $out/share/hello/.venv
+        # Copy the virtual environment
+        cp -r .venv $out/share/hello/.venv
 
-    mkdir -p $out/bin
-    cat > $out/bin/hello <<EOF
-#!/bin/sh
-export UV_PROJECT_ENVIRONMENT=$out/share/hello/.venv
-cd $out/share/hello
-exec ${pkgs.uv}/bin/uv run --no-sync python main.py
-EOF
-    chmod +x $out/bin/hello
+        mkdir -p $out/bin
+        cat > $out/bin/hello <<EOF
+    #!/bin/sh
+    export UV_PROJECT_ENVIRONMENT=$out/share/hello/.venv
+    cd $out/share/hello
+    exec ${pkgs.uv}/bin/uv run --no-sync python main.py
+    EOF
+        chmod +x $out/bin/hello
   '';
 
   meta = with pkgs.lib; {

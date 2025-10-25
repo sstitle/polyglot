@@ -5,6 +5,7 @@
     # keep-sorted start
     keep-sorted.enable = true;
     nixfmt.enable = true;
+    ruff.enable = true;
     # keep-sorted end
 
     mdformat = {
