@@ -28,15 +28,31 @@
         }:
         let
           treefmtEval = inputs.treefmt-nix.lib.evalModule pkgs ./treefmt.nix;
+          hello-py = pkgs.callPackage ./hello/python/hello/default.nix { };
         in
         {
+          # Packages
+          packages = {
+            hello-py = hello-py;
+          };
+
+          # Apps (for nix run)
+          apps = {
+            hello-py = {
+              type = "app";
+              program = "${hello-py}/bin/hello";
+            };
+          };
+
           # Development shell with nickel and mask
           devShells.default = pkgs.mkShell {
             buildInputs = with pkgs; [
               # Core tools
               git
-              nickel
               mask
+
+              # Python support
+              uv
             ];
 
             shellHook = ''
