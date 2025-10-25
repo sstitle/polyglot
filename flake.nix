@@ -31,6 +31,7 @@
           hello-py = pkgs.callPackage ./hello/python/hello/default.nix { };
           hello-c = pkgs.callPackage ./hello/c/hello/default.nix { };
           hello-zig = pkgs.callPackage ./hello/zig/hello/default.nix { };
+          hello-rust = pkgs.callPackage ./hello/rust/hello/default.nix { };
         in
         {
           # Packages
@@ -38,6 +39,7 @@
             hello-py = hello-py;
             hello-c = hello-c;
             hello-zig = hello-zig;
+            hello-rust = hello-rust;
           };
 
           # Apps (for nix run)
@@ -54,6 +56,10 @@
               type = "app";
               program = "${hello-zig}/bin/hello";
             };
+            hello-rust = {
+              type = "app";
+              program = "${hello-rust}/bin/hello";
+            };
           };
 
           # Development shell with nickel and mask
@@ -67,6 +73,15 @@
               uv      # Python
               clang   # C
               zig     # Zig
+
+              # Rust
+              rustc
+              cargo
+              rust-analyzer
+
+              # Nix support
+              nil
+              nixd
             ];
 
             shellHook = ''
